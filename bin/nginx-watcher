@@ -1,25 +1,5 @@
 #!/usr/bin/env ruby
 
-program :name, "Classify Cluster"
-program :version, ClassifyCluster::VERSION
-program :description, 'Generates configurations for different aspects of the cluster based off of one configuration.'
-default_command :puppet
-
-command :puppet do |c|
-  c.syntax = 'classify puppet <clustername> [options]'
-  c.description = 'Returns on STDOUT YAML dump of the clusters puppet config'
-  c.option '--config STRING', String, 'Location to config file.'
-  c.option '--export STRING', String, 'Location to output puppet cluster config'
-  c.action do |args, options|
-    options.default :config => ClassifyCluster::Base.default_config_file, :export => ENV['HOME']
-    ClassifyCluster::Writers::Puppet.export!(options.export, :cluster => args[0], :config_file => options.config)
-    say("Success!")
-  end
-end
-
-
-#!/usr/bin/env ruby
-
 require "nginx-watcher"
 require "nginx-watcher/version"
 require "commander/import"
