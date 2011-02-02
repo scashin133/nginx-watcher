@@ -30,7 +30,7 @@ command :watch do |c|
           if localtime = Nginx::Watcher::LOCALTIME.match(line)
             info[:localtime] = localtime[1]
           end
-          http = EventMachine::HttpRequest.new("http://#{options.host}:#{port}/#{path}").post(
+          http = EventMachine::HttpRequest.new("http://#{options.host}:#{options.port}/#{options.path}").post(
             :body => info, 
             :timeout => 2
           )
