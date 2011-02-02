@@ -17,12 +17,9 @@ command :watch do |c|
   c.option '--host HOST', String, 'host to report to'
   c.option '--path PATH', String, 'path to report to'
   c.option '--port PORT', Integer, 'port to report to'
-  c.option '--daemon', 'run as a daemon'
   c.action do |args, options|
-    options.default :daemon => false, :host => "127.0.0.1", :port => 80, :path => ""
-    
-    Daemons.daemonize if options.daemon
-    
+    options.default :host => "127.0.0.1", :port => 80, :path => ""
+
     EventMachine.run do
       args.each do |path|
         EventMachine::file_tail(path) do |filetail, line|

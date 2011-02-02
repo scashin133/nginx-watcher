@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.add_dependency(%q<eventmachine>, ["~> 0.12.10"])
   s.add_dependency(%q<em-http-request>, ["~> 0.3.0"])
   s.add_dependency(%q<eventmachine-tail>, ["~> 0.5.20110118081348"])
-  s.add_dependency(%q<daemons>, ["~> 1.0.10"])
   s.add_dependency(%q<commander>, ["~> 4.0.3"])
 
   s.rubyforge_project = "nginx-watcher"
