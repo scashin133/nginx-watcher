@@ -24,7 +24,7 @@ command :watch do |c|
     Daemons.daemonize if options.daemon
     
     EventMachine.run do
-      ARGV.each do |path|
+      args.each do |path|
         EventMachine::file_tail(path) do |filetail, line|
           info = {}
           if ip = Nginx::Watcher::IP.match(line)
