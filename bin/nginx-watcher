@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require "nginx-watcher"
+
+EventMachine.run do
+  ARGV.each do |path|
+    EventMachine::file_tail(path) do |filetail, line|
+      info = {}
+      if ip = Nginx::Watcher::IP.match(line)
+        info[:ip] = ip[1]
+      end
+      if localtime = Nginx::Watcher::LOCALTIME.match(line)
+        info[:localtime] = localtime[1]
+      end
+      http = EventMachine::HttpRequest.new('http://127.0.0.1:3000/ip').post :body => info, :timeout => 2
+
+    end
+  end
+end
